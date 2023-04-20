@@ -22,11 +22,14 @@
 
     <Spinner
         android:id="@+id/sizeSpinner"
-        android:layout_width="213dp"
-        android:layout_height="77dp"
+        android:layout_width="151dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/mochaBox"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.769"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mochaBox" />
+        app:layout_constraintTop_toBottomOf="@+id/numberOfCupsSpinner" />
 
     <CheckBox
         android:id="@+id/sweetBox"
@@ -78,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/french_vanilla"
+        app:layout_constraintBottom_toTopOf="@+id/sweetBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.226"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,13 +110,19 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subTotalText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.039" />
 
     <Spinner
-        android:id="@+id/numberOfCups"
+        android:id="@+id/numberOfCupsSpinner"
         android:layout_width="145dp"
         android:layout_height="78dp"
-        tools:layout_editor_absoluteX="200dp"
-        tools:layout_editor_absoluteY="294dp" />
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/mochaBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sweetBox"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
