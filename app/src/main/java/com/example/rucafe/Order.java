@@ -62,8 +62,8 @@ public class Order {
         for(MenuItem item : items) {
             output+= "\t" + item.toString() + "\n";
         }
-        output+= "\tTax: $" + df.format(getOrderPrice()*BasketController.JERSEY_TAX) + "\n";
-        output += " Total Price: $" + df.format(getOrderPrice()*BasketController.JERSEY_TAX + getOrderPrice());
+        //output+= "\tTax: $" + df.format(getOrderPrice()*BasketController.JERSEY_TAX) + "\n";
+        //output += " Total Price: $" + df.format(getOrderPrice()*BasketController.JERSEY_TAX + getOrderPrice());
         return output;
     }
 }

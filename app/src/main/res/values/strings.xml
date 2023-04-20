@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">RUCafe</string>
-    <string name = "cafe_title">RU Cafe </string>
+    <string name="cafe_title">RU Cafe </string>
+    <string name = "subtotal">Subtotal: </string>
+    <string name = "add_to_order">Add To Order</string>
 
 </resources>

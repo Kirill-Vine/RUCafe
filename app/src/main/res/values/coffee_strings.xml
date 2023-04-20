@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name = "french_vanilla">French Vanilla</string>
+    <string name = "sweet_cream">Sweet Cream</string>
+    <string name = "irish_cream">Irish Cream</string>
+    <string name = "caramel">Caramel</string>
+    <string name = "mocha">Mocha</string>
+</resources>
