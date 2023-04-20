@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="223dp"
@@ -30,12 +31,14 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.592"
         app:srcCompat="@drawable/doughnut_menu" />
 
     <ImageButton
-        android:id="@+id/coffeImageButton"
+        android:id="@+id/coffeeImageButton"
         style="@android:style/Widget.ImageButton"
         android:layout_width="251dp"
         android:layout_height="172dp"
