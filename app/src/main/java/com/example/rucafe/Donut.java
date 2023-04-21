@@ -7,7 +7,7 @@ package com.example.rucafe;
  */
 public abstract class Donut extends MenuItem {
     String flavor;
-    String[] potentialFlavors = {
+    static String[] potentialFlavors = {
             "Chocolate",
             "Strawberry",
             "Vanilla",
@@ -26,5 +26,8 @@ public abstract class Donut extends MenuItem {
                 break;
             }
         }
+    }
+    public static String[] getFlavors() {
+        return potentialFlavors;
     }
 }

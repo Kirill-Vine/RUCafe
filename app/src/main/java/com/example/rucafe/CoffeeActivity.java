@@ -23,67 +23,44 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private Spinner sizeSpinner, numberOfCupsSpinner;
     private Button coffeeOrderButton;
     private CheckBox frenchVanilla, sweetCream, irishCream, caramel, mocha;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coffee);
+    void setCheckBoxListener(CheckBox cb, String addon) {
+        cb.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(cb.isChecked()) {
+                    currentCoffee.addAddon(addon);
+                } else {
+                    currentCoffee.removeAddon(addon);
+                }
+                updateSubTotal();
+            }
+        });
+    }
+    void setAddonButtons() {
         coffeeOrderButton = (Button)findViewById(R.id.coffeeOrderButton);
         frenchVanilla = (CheckBox)findViewById(R.id.frenchVanillaBox);
         sweetCream = (CheckBox)findViewById(R.id.sweetBox);
         irishCream = (CheckBox)findViewById(R.id.irishCreamBox);
         caramel = (CheckBox)findViewById(R.id.caramelBox);
         mocha = (CheckBox)findViewById(R.id.mochaBox);
-        frenchVanilla.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(frenchVanilla.isChecked()) {
-                    currentCoffee.addAddon("French Vanilla");
-                } else {
-                    currentCoffee.removeAddon("French Vanilla");
-                }
-                updateSubTotal();
-            }
-        });
-        sweetCream.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(sweetCream.isChecked()) {
-                    currentCoffee.addAddon("Sweet Cream");
-                } else {
-                    currentCoffee.removeAddon("Sweet Cream");
-                }
-                updateSubTotal();
-            }
-        });
-        irishCream.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(irishCream.isChecked()) {
-                    currentCoffee.addAddon("Irish Cream");
-                } else {
-                    currentCoffee.removeAddon("Irish Cream");
-                }
-                updateSubTotal();
-            }
-        });
-        caramel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(caramel.isChecked()) {
-                    currentCoffee.addAddon("Caramel");
-                } else {
-                    currentCoffee.removeAddon("Caramel");
-                }
-                updateSubTotal();
-            }
-        });
-        mocha.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(mocha.isChecked()) {
-                    currentCoffee.addAddon("Mocha");
-                } else {
-                    currentCoffee.removeAddon("Mocha");
-                }
-                updateSubTotal();
-            }
-        });
+        setCheckBoxListener(frenchVanilla, "French Vanilla");
+        setCheckBoxListener(sweetCream, "Sweet Cream");
+        setCheckBoxListener(irishCream, "Irish Cream");
+        setCheckBoxListener(caramel, "Caramel");
+        setCheckBoxListener(mocha, "Mocha");
+    }
+    <T> void setSpinner (Spinner spinner, List<T> list) {
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter<T> dataAdapter = new ArrayAdapter<T> (this,android.R.layout.simple_spinner_item,list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_coffee);
+        setAddonButtons();
         coffeeOrderButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MainActivity.currentOrder.addItem(currentCoffee);
@@ -96,30 +73,22 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                 mocha.setSelected(false);
                 numberOfCupsSpinner.setSelection(0);
                 sizeSpinner.setSelection(0);
+                updateSubTotal();
             }
         });
         sizeSpinner = (Spinner) findViewById(R.id.sizeSpinner);
         numberOfCupsSpinner = (Spinner) findViewById(R.id.numberOfCupsSpinner);
-        sizeSpinner.setOnItemSelectedListener(this);
-        numberOfCupsSpinner.setOnItemSelectedListener(this);
         List<String> cupSizeCategories = new ArrayList<>();
         cupSizeCategories.add("SHORT");
         cupSizeCategories.add("TALL");
         cupSizeCategories.add("GRANDE");
         cupSizeCategories.add("VENTI");
-
         List<Integer> noOfCupsCategories = new ArrayList<>();
         for(int i = MIN_CUPS; i < MAX_CUPS +1; i++) {
             noOfCupsCategories.add(i);
         }
-        ArrayAdapter<String> dataAdapterCupSize = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cupSizeCategories);
-        ArrayAdapter<Integer> dataAdapterNoOfCups = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, noOfCupsCategories);
-
-        dataAdapterCupSize.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dataAdapterNoOfCups.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        sizeSpinner.setAdapter(dataAdapterCupSize);
-        numberOfCupsSpinner.setAdapter(dataAdapterNoOfCups);
+        setSpinner(numberOfCupsSpinner,noOfCupsCategories);
+        setSpinner(sizeSpinner,cupSizeCategories);
     }
 
     @Override
@@ -149,14 +118,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                 currentCoffee.setQuantity(numberOfCups);
                 updateSubTotal();
                 break;
-
         }
 
     }
     void updateSubTotal() {
         DecimalFormat df = new DecimalFormat("#,###.00");
         TextView subtotal = (TextView)findViewById(R.id.subTotalText);
-        subtotal.setText(getString(R.string.subtotal)+" $"+df.format(currentCoffee.itemPrice()));
+        subtotal.setText(getString(R.string.subtotal)+" $"+df.format(currentCoffee.getQuantity()*currentCoffee.itemPrice()));
     }
     @Override
     public void onClick(View v) {
