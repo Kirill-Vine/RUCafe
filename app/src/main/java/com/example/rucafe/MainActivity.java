@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
+    public static Order currentOrder = new Order();
 
     ImageButton cofeeImageButton;
     ImageButton donutImageButton;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton ordersImageButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("test","this is a test");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cofeeImageButton = (ImageButton) findViewById(R.id.coffeeImageButton);
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 openCoffeeActivity();
             }
         });
+
         donutImageButton = (ImageButton) findViewById(R.id.donutImageButton);
         donutImageButton.setOnClickListener(new View.OnClickListener() {
             @Override

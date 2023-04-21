@@ -55,6 +55,13 @@ public class Coffee extends MenuItem{
     }
 
     /**
+     * Changes size of the coffee
+     */
+    void setSize(sizes sizeEnum) {
+        size = sizeEnum;
+    }
+
+    /**
      * Displays options for sizes of the coffee cups
      * @return size
      */
