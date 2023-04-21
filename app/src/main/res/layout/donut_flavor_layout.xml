@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="412dp"
+        android:layout_height="123dp"
+        app:cardBackgroundColor="#B93BBED5"
+        app:cardCornerRadius="2dp"
+        app:contentPadding="10dp"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="78dp"
+                android:layout_height="76dp"
+                tools:layout_editor_absoluteX="-1dp"
+                tools:layout_editor_absoluteY="8dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="195dp"
+                android:layout_height="56dp"
+                android:fontFamily="sans-serif-black"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                android:textColor="#D11487"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="87dp"
+                tools:layout_editor_absoluteY="31dp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="94dp"
+                android:layout_height="60dp"
+                android:backgroundTint="#FFFFFF"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/add_to_order"
+                android:textColor="#D85CA8"
+                android:textStyle="bold"
+                app:iconTint="#FFFFFF"
+                app:iconTintMode="add"
+                tools:layout_editor_absoluteX="282dp"
+                tools:layout_editor_absoluteY="21dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

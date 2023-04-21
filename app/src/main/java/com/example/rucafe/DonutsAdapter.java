@@ -21,7 +21,11 @@ import java.util.ArrayList;
 public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.DonutsHolder> {
     Context context;
     ArrayList<String> flavors;
+    /* necessary data:
+    flavor image
+    price
 
+    */
     public DonutsAdapter(Context c, ArrayList<String> f) {
         context = c;
         flavors = f;
