@@ -11,8 +11,8 @@
 
     <ListView
         android:id="@+id/ordersList"
-        android:layout_width="409dp"
-        android:layout_height="500dp"
+        android:layout_width="410dp"
+        android:layout_height="428dp"
         android:layout_marginTop="124dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
@@ -21,6 +21,9 @@
         android:id="@+id/removeItem"
         android:layout_width="246dp"
         android:layout_height="50dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginBottom="100dp"
         android:background="#C2185B"
         android:backgroundTint="#C2185B"
         android:drawableTint="#689F38"
@@ -29,9 +32,11 @@
         android:textColorHint="#00796B"
         android:textColorLink="#FF0000"
         app:iconTint="#AFB42B"
-        app:rippleColor="#303F9F"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="655dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="#303F9F" />
 
     <TextView
         android:id="@+id/YourShoppingCart"
