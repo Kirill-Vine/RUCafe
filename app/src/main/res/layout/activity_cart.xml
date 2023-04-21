@@ -9,21 +9,37 @@
     android:foregroundTint="#7B1FA2"
     tools:context=".CartActivity">
 
+    <Button
+        android:id="@+id/addOrder"
+        android:layout_width="166dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="32dp"
+        android:background="#C2185B"
+        android:backgroundTint="#C2185B"
+        android:drawableTint="#689F38"
+        android:text="Add Order"
+        android:textColor="#FBC02D"
+        android:textColorHint="#00796B"
+        android:textColorLink="#FF0000"
+        app:iconTint="#AFB42B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderTotal"
+        app:rippleColor="#303F9F" />
+
     <ListView
         android:id="@+id/ordersList"
         android:layout_width="410dp"
         android:layout_height="428dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="90dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
 
     <Button
         android:id="@+id/removeItem"
-        android:layout_width="246dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="82dp"
-        android:layout_marginEnd="83dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="166dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
         android:background="#C2185B"
         android:backgroundTint="#C2185B"
         android:drawableTint="#689F38"
@@ -32,16 +48,19 @@
         android:textColorHint="#00796B"
         android:textColorLink="#FF0000"
         app:iconTint="#AFB42B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/addOrder"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addOrder"
         app:rippleColor="#303F9F" />
 
     <TextView
         android:id="@+id/YourShoppingCart"
         android:layout_width="298dp"
         android:layout_height="61dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="casual"
         android:text="@string/YourShoppingCart"
         android:textAllCaps="false"
@@ -50,7 +69,53 @@
         android:textColorLink="#FF0000"
         android:textSize="34sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="39dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ordersList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/orderSubtotal"
+        android:layout_width="278dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="16dp"
+        android:text="Subtotal: "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/orderTax"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ordersList" />
+
+    <TextView
+        android:id="@+id/orderTax"
+        android:layout_width="286dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginEnd="14dp"
+        android:text="Sales Tax: "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/orderTotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderSubtotal" />
+
+    <TextView
+        android:id="@+id/orderTotal"
+        android:layout_width="288dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="16dp"
+        android:text="Total:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/removeItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderTax" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

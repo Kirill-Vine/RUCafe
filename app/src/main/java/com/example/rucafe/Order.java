@@ -10,7 +10,7 @@ public class Order {
     static int currentOrderNumber = 0;
     int orderNumber;
     double orderPrice = 0;
-    ArrayList<MenuItem> items = new ArrayList<MenuItem>();
+    ArrayList<MenuItem> items = new ArrayList<>();
     Order() {
         orderNumber = currentOrderNumber;
         currentOrderNumber++;
@@ -51,6 +51,9 @@ public class Order {
         }
         return finalPrice;
     }
+    public ArrayList<MenuItem> getItems(){
+        return items;
+    }
     /**
      * convert order data to string
      * @return string
@@ -62,8 +65,6 @@ public class Order {
         for(MenuItem item : items) {
             output+= "\t" + item.toString() + "\n";
         }
-        //output+= "\tTax: $" + df.format(getOrderPrice()*BasketController.JERSEY_TAX) + "\n";
-        //output += " Total Price: $" + df.format(getOrderPrice()*BasketController.JERSEY_TAX + getOrderPrice());
         return output;
     }
 }

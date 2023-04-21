@@ -121,7 +121,7 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         }
 
     }
-    void updateSubTotal() {
+    private void updateSubTotal() {
         DecimalFormat df = new DecimalFormat("#,###.00");
         TextView subtotal = (TextView)findViewById(R.id.subTotalText);
         subtotal.setText(getString(R.string.subtotal)+" $"+df.format(currentCoffee.getQuantity()*currentCoffee.itemPrice()));
