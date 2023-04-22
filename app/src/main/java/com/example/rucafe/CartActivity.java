@@ -16,12 +16,15 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartActivity extends Activity {
-    ArrayList<MenuItem> orderItems;
+    private ArrayList<MenuItem> orderItems;
     private Button removeSelected;
     private String selectedItem;
     private ListView listView;
     private ArrayAdapter adapter;
     private Button addOrder;
+    private double subtotal;
+    private double tax;
+    private double total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class CartActivity extends Activity {
         });
         addOrder.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                //order is erased
+                //order is added to allOrders array list and a new curent order is created
                 MainActivity.allOrders.add(MainActivity.currentOrder);
                 MainActivity.currentOrder = new Order();
                 displayTotal();
@@ -76,13 +79,16 @@ public class CartActivity extends Activity {
     }
     private void displayTotal() {
         DecimalFormat df = new DecimalFormat("#,###.00");
-        TextView subtotal = (TextView)findViewById(R.id.orderSubtotal);
-        TextView tax = (TextView)findViewById(R.id.orderTax);
-        TextView total = (TextView)findViewById(R.id.orderTotal);
-        subtotal.setText(getString(R.string.subtotal)+" $"+df.format(MainActivity.currentOrder.getOrderPrice()));
-        tax.setText(getString(R.string.tax)+" $"+df.format(MainActivity.currentOrder.getOrderPrice()*0.06625));
-        total.setText(getString(R.string.total)+" $"+
-                df.format(MainActivity.currentOrder.getOrderPrice()+MainActivity.currentOrder.getOrderPrice()*0.06625));
+        TextView orderSubtotal = (TextView)findViewById(R.id.orderSubtotal);
+        TextView orderTax = (TextView)findViewById(R.id.orderTax);
+        TextView orderTotal = (TextView)findViewById(R.id.orderTotal);
+        subtotal=MainActivity.currentOrder.getOrderPrice();
+        tax=MainActivity.currentOrder.getOrderPrice()*0.06625;
+        total=MainActivity.currentOrder.getOrderPrice()+MainActivity.currentOrder.getOrderPrice()*0.06625;
+        orderSubtotal.setText(getString(R.string.subtotal)+" $"+df.format(subtotal));
+        orderTax.setText(getString(R.string.tax)+" $"+df.format(tax));
+        orderTotal.setText(getString(R.string.total)+" $"+
+                df.format(total));
 
     }
 }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static Order currentOrder = new Order();
-    public static ArrayList<Order> allOrders = new ArrayList<Order>();
+    public static ArrayList<Order> allOrders = new ArrayList<>();
 
     ImageButton cofeeImageButton;
     ImageButton donutImageButton;
