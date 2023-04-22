@@ -11,8 +11,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     public static Order currentOrder = new Order();
+    public static ArrayList<Order> allOrders = new ArrayList<Order>();
 
     ImageButton cofeeImageButton;
     ImageButton donutImageButton;

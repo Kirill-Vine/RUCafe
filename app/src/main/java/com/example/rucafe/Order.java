@@ -2,7 +2,7 @@ package com.example.rucafe;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 /**
- * Class for orders view
+ * Class for orders list
  * @author Kirill Vine
  * @author Michael Burton
  */

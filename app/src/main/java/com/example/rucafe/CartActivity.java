@@ -2,6 +2,7 @@ package com.example.rucafe;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,22 +16,21 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartActivity extends Activity {
-    ArrayList<MenuItem> orderItems = MainActivity.currentOrder.getItems();
+    ArrayList<MenuItem> orderItems;
     private Button removeSelected;
     private String selectedItem;
     private ListView listView;
     private ArrayAdapter adapter;
+    private Button addOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         removeSelected = (Button) findViewById(R.id.removeItem);
+        addOrder = (Button) findViewById(R.id.addOrder);
         showList();
         displayTotal();
-
-
-
         removeSelected.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (int i = 0; i < orderItems.size(); i++) {
@@ -42,8 +42,18 @@ public class CartActivity extends Activity {
                 showList();
             }
         });
+        addOrder.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                //order is erased
+                MainActivity.allOrders.add(MainActivity.currentOrder);
+                MainActivity.currentOrder = new Order();
+                displayTotal();
+                showList();
+            }
+        });
     }
     private void showList(){
+        orderItems = MainActivity.currentOrder.getItems();
         String orderStringList [] = new String[orderItems.size()];
         for(int i = 0; i < orderItems.size(); i++) {
             orderStringList[i]=orderItems.get(i).toString();
