@@ -67,10 +67,15 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                 Toast.makeText(v.getContext(),currentCoffee.toString() + " added to order", Toast.LENGTH_LONG).show();
                 currentCoffee = new Coffee(sizes.SHORT);
                 frenchVanilla.setSelected(false);
+                frenchVanilla.setChecked(false);
                 irishCream.setSelected(false);
+                irishCream.setChecked(false);
                 sweetCream.setSelected(false);
+                sweetCream.setChecked(false);
                 caramel.setSelected(false);
+                caramel.setChecked(false);
                 mocha.setSelected(false);
+                mocha.setChecked(false);
                 numberOfCupsSpinner.setSelection(0);
                 sizeSpinner.setSelection(0);
                 updateSubTotal();
