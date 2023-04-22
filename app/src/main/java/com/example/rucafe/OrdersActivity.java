@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OrdersActivity extends AppCompatActivity {
@@ -22,17 +23,28 @@ public class OrdersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
+        removeSelected = (Button) findViewById(R.id.cancelOrder);
         showList();
+        removeSelected.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                for (int i = 0; i < orders.size(); i++) {
+                    if(orders.get(i).toString().equals(selectedItem)){
+                        MainActivity.allOrders.remove(orders.get(i));
+                    }
+                }
+                showList();
+            }
+        });
     }
     private void showList(){
+        DecimalFormat df = new DecimalFormat("#,###.00");
         orders = MainActivity.allOrders;
         String ordersStringList [] = new String[orders.size()];
         for(int i = 0; i < orders.size(); i++) {
-            ordersStringList[i]=orders.get(i).toString()+"Order total: $"+orders.get(i).getOrderPrice();
+            ordersStringList[i]=orders.get(i).toString()+"Order total: $"+df.format(orders.get(i).getOrderPrice());
         }
         adapter = new ArrayAdapter<String>(this,
                 R.layout.activity_listview, ordersStringList);
-//        adapter.add();
 
         listView = (ListView) findViewById(R.id.ordersList);
         listView.setAdapter(adapter);
@@ -45,9 +57,6 @@ public class OrdersActivity extends AppCompatActivity {
                 selectedItem = (String) adapter.getItem(position);
             }
         });
-
-    }
-    private void displayTotal() {
 
     }
 }

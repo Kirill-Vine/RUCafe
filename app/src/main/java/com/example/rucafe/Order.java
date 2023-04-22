@@ -61,7 +61,7 @@ public class Order {
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#,###.00");
-        String output = "Order #" + orderNumber + ": \n";
+        String output = "Order #" + (orderNumber+1) + ": \n";
         for(MenuItem item : items) {
             output+= "\t" + item.toString() + "\n";
         }
