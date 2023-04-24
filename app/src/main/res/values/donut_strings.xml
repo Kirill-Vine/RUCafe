@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name = "type">Type: </string>
+    <string name = "donut_type">Type: </string>
     <string name = "yeast_donut">Yeast Donut</string>
     <string name = "cake_donut">Cake Donut</string>
     <string name = "donut_hole">Donut Hole</string>

@@ -2,6 +2,7 @@ package com.example.rucafe;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.content.Intent;
+import android.widget.Toast;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -45,6 +48,8 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.DonutsHold
             addToOrder = itemView.findViewById(R.id.addDonutOrderButton);
             parentLayout = itemView.findViewById(R.id.donutTypeLayout);
         }
+
+
     }
 
     @NonNull
@@ -54,20 +59,34 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.DonutsHold
         View view = inflater.inflate(R.layout.donut_flavor_layout, parent, false);
         return new DonutsHolder(view);
     }
-
+    void setButtonListener(Button b,Donut d) {
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.currentOrder.addItem(d);
+                Toast.makeText(b.getContext(),"Donut added to order",Toast.LENGTH_LONG).show();
+                DonutActivity.subTotal +=d.itemPrice();
+                DecimalFormat df = new DecimalFormat("#,###.00");
+                DonutActivity.subTotalText.setText("Subtotal: $" + df.format(DonutActivity.subTotal));
+            }
+        });
+    }
     @Override
     public void onBindViewHolder(@NonNull DonutsHolder holder, int position) {
         DecimalFormat df = new DecimalFormat("#####.00");
         Donut tempDonut = donutList.get(position);
-        String typeString = Resources.getSystem().getString(R.string.type);
+
+        String typeString = "Type: ";
         if(tempDonut instanceof YeastDonut) {
-            typeString+= Resources.getSystem().getString(R.string.yeast_donut);
+            typeString+= "Yeast";
         } else if(tempDonut instanceof CakeDonut) {
-            typeString+= Resources.getSystem().getString(R.string.cake_donut);
+            typeString+= "Cake";
         } else if(tempDonut instanceof DonutHole) {
-            typeString+= Resources.getSystem().getString(R.string.donut_hole);
+            typeString+= "Donut Hole";
         }
         holder.donutTypeText.setText(typeString);
+        setButtonListener(holder.addToOrder,donutList.get(position));
+        Log.d("test",donutList.get(position).getFlavor());
         holder.donutFlavorText.setText(donutList.get(position).getFlavor());
         holder.donutFlavorImage.setImageResource(images[position]);
         holder.donutPriceText.setText("$" + df.format(donutList.get(position).itemPrice()));
