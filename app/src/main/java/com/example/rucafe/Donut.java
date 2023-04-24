@@ -8,16 +8,17 @@ package com.example.rucafe;
 public abstract class Donut extends MenuItem {
     String flavor;
     static String[] potentialFlavors = {
+            "Vanilla",
             "Chocolate",
             "Strawberry",
-            "Vanilla",
-            "Caramel",
             "Banana",
-            "Mint"
+            "Mint",
+            "Caramel",
     };
 
     /**
      * sets flavor if its a possible flavor
+     * @param s string that represents flavor for donut
      */
     public void setFlavor(String s) {
         for(int i = 0; i < potentialFlavors.length;i++) {
@@ -27,7 +28,20 @@ public abstract class Donut extends MenuItem {
             }
         }
     }
+
+    /**
+     *  returns full flavors list
+     * @return potentialFlavors list
+     */
     public static String[] getFlavors() {
         return potentialFlavors;
+    }
+
+    /**
+     * returns donut's flavor
+     * @return string that represents donut's flavor
+     */
+    public String getFlavor() {
+        return flavor;
     }
 }
