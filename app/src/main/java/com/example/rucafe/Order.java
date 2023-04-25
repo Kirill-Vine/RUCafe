@@ -33,24 +33,20 @@ public class Order {
     }
 
     /**
-     * Sets price for the order
-     * @param d
-     */
-    public void setOrderPrice(double d) {
-        orderPrice = d;
-    }
-
-    /**
      * Displays price of the order
      * @return order price
      */
     public double getOrderPrice() {
         double finalPrice = 0;
         for(MenuItem item: items) {
-            finalPrice+= item.itemPrice();
+            finalPrice += item.itemPrice()* item.getQuantity();
         }
         return finalPrice;
     }
+
+    /**
+     * @return items in the array of items
+     */
     public ArrayList<MenuItem> getItems(){
         return items;
     }

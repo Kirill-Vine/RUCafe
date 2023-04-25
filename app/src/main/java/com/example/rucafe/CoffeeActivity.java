@@ -1,7 +1,6 @@
 package com.example.rucafe;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,12 +9,17 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.DecimalFormat;
 import android.widget.Button;
-
+/**
+ * Class for CoffeeActivity where user can
+ * select addons, number of cups, cup size
+ * and add the order to cart
+ * @author Kirill Vine
+ * @author Michael Burton
+ */
 public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
     public static Coffee currentCoffee = new Coffee(sizes.SHORT);
     public static final int MAX_CUPS = 5;
@@ -23,18 +27,27 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private Spinner sizeSpinner, numberOfCupsSpinner;
     private Button coffeeOrderButton;
     private CheckBox frenchVanilla, sweetCream, irishCream, caramel, mocha;
+
+    /**
+     * initializes the listener for checkboxes for addons
+     * and updates the total when a checkbox is clicked
+     * @param cb checkbox
+     * @param addon type of addon for each checkbox
+     */
     void setCheckBoxListener(CheckBox cb, String addon) {
-        cb.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(cb.isChecked()) {
-                    currentCoffee.addAddon(addon);
-                } else {
-                    currentCoffee.removeAddon(addon);
-                }
-                updateSubTotal();
+        cb.setOnClickListener(v -> {
+            if(cb.isChecked()) {
+                currentCoffee.addAddon(addon);
+            } else {
+                currentCoffee.removeAddon(addon);
             }
+            updateSubTotal();
         });
     }
+
+    /**
+     * initializes the checkbox buttons for addons
+     */
     void setAddonButtons() {
         coffeeOrderButton = (Button)findViewById(R.id.coffeeOrderButton);
         frenchVanilla = (CheckBox)findViewById(R.id.frenchVanillaBox);
@@ -48,6 +61,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         setCheckBoxListener(caramel, "Caramel");
         setCheckBoxListener(mocha, "Mocha");
     }
+
+    /**
+     * initializes the spinner for dropdown menus
+     * @param spinner the dropdown menu
+     * @param list items in the dropdown menu
+     * @param <T>
+     */
     <T> void setSpinner (Spinner spinner, List<T> list) {
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<T> dataAdapter = new ArrayAdapter<T> (this,android.R.layout.simple_spinner_item,list);
@@ -55,6 +75,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         spinner.setAdapter(dataAdapter);
 
     }
+
+    /**
+     * deselects checkboxes for addons after order is added to cart
+     */
     void deselectAddons() {
         frenchVanilla.setSelected(false);
         frenchVanilla.setChecked(false);
@@ -69,21 +93,27 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
+    /**
+     * initializes the activity and displays all the elements of UI.
+     * allows user to use the buttons to customize and order coffee
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coffee);
         setAddonButtons();
-        coffeeOrderButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                MainActivity.currentOrder.addItem(currentCoffee);
-                Toast.makeText(v.getContext(),currentCoffee.toString() + " added to order", Toast.LENGTH_LONG).show();
-                currentCoffee = new Coffee(sizes.SHORT);
-                deselectAddons();
-                numberOfCupsSpinner.setSelection(0);
-                sizeSpinner.setSelection(0);
-                updateSubTotal();
-            }
+        coffeeOrderButton.setOnClickListener(v -> {
+            MainActivity.currentOrder.addItem(currentCoffee);
+            Toast.makeText(v.getContext(),currentCoffee.toString() + " added to order", Toast.LENGTH_LONG).show();
+            currentCoffee = new Coffee(sizes.SHORT);
+            deselectAddons();
+            numberOfCupsSpinner.setSelection(0);
+            sizeSpinner.setSelection(0);
+            updateSubTotal();
         });
         sizeSpinner = (Spinner) findViewById(R.id.sizeSpinner);
         numberOfCupsSpinner = (Spinner) findViewById(R.id.numberOfCupsSpinner);
@@ -100,6 +130,13 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         setSpinner(sizeSpinner,cupSizeCategories);
     }
 
+    /**
+     * updates current subtotal text when choosing cup size and number of cups
+     * @param parent The AdapterView where the selection happened
+     * @param view The view within the AdapterView that was clicked
+     * @param position The position of the view in the adapter
+     * @param id The row id of the item that is selected
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch(parent.getId()){
@@ -130,15 +167,27 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         }
 
     }
+
+    /**
+     * updates current subtotal text
+     */
     private void updateSubTotal() {
         DecimalFormat df = new DecimalFormat("#,###.00");
         TextView subtotal = (TextView)findViewById(R.id.subTotalText);
         subtotal.setText(getString(R.string.subtotal)+" $"+df.format(currentCoffee.getQuantity()*currentCoffee.itemPrice()));
     }
+
+    /**
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
 
     }
+
+    /**
+     * @param parent The AdapterView that now contains no selected item.
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
 }

@@ -20,7 +20,7 @@ public class Coffee extends MenuItem{
     sizes size;
     double price = ORIGINAL_PRICE;
 
-    ArrayList<String> currentAddons = new ArrayList<String>();
+    ArrayList<String> currentAddons = new ArrayList<>();
     Coffee(sizes s) {
         size = s;
     }
@@ -59,14 +59,6 @@ public class Coffee extends MenuItem{
      */
     void setSize(sizes sizeEnum) {
         size = sizeEnum;
-    }
-
-    /**
-     * Displays options for sizes of the coffee cups
-     * @return size
-     */
-    sizes getSize() {
-        return size;
     }
 
     /**

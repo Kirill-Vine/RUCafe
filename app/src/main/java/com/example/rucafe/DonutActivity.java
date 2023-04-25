@@ -3,17 +3,15 @@ package com.example.rucafe;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.ArrayList;
-
-
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-
+/**
+ * Class for DonutActivity where user can
+ * add a specific type of donut to cart
+ * @author Kirill Vine
+ * @author Michael Burton
+ */
 public class DonutActivity extends AppCompatActivity {
     public final static int DONUT_NUMBER  = 3;
     public final static int YEAST = 0;
@@ -66,21 +64,13 @@ public class DonutActivity extends AppCompatActivity {
                 }
                 tempDonut.setFlavor(s);
                 donutsList.add(tempDonut);
-                Log.d("flavor",s);
             }
         }
     }
-    public void updateSubTotal(double d) {
-
-        
-    }
-    
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Log.d("test","donutType Created");
         super.onCreate(savedInstanceState);
         makeDonutList();
         setContentView(R.layout.activity_donut);

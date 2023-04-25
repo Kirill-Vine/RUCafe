@@ -1,8 +1,6 @@
 package com.example.rucafe;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.content.Intent;
 import android.widget.Toast;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
+/**
+ * Adapter class for DonutActivity
+ * @author Kirill Vine
+ * @author Michael Burton
+ */
 public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.DonutsHolder> {
     Context context;
     ArrayList<Donut> donutList;
@@ -60,15 +60,12 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.DonutsHold
         return new DonutsHolder(view);
     }
     void setButtonListener(Button b,Donut d) {
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.currentOrder.addItem(d);
-                Toast.makeText(b.getContext(),"Donut added to order",Toast.LENGTH_LONG).show();
-                DonutActivity.subTotal +=d.itemPrice();
-                DecimalFormat df = new DecimalFormat("#,###.00");
-                DonutActivity.subTotalText.setText("Subtotal: $" + df.format(DonutActivity.subTotal));
-            }
+        b.setOnClickListener(v -> {
+            MainActivity.currentOrder.addItem(d);
+            Toast.makeText(b.getContext(),"Donut added to order",Toast.LENGTH_LONG).show();
+            DonutActivity.subTotal +=d.itemPrice();
+            DecimalFormat df = new DecimalFormat("#,###.00");
+            DonutActivity.subTotalText.setText("Subtotal: $" + df.format(DonutActivity.subTotal));
         });
     }
     @Override
@@ -86,7 +83,6 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.DonutsHold
         }
         holder.donutTypeText.setText(typeString);
         setButtonListener(holder.addToOrder,donutList.get(position));
-        Log.d("test",donutList.get(position).getFlavor());
         holder.donutFlavorText.setText(donutList.get(position).getFlavor());
         holder.donutFlavorImage.setImageResource(images[position]);
         holder.donutPriceText.setText("$" + df.format(donutList.get(position).itemPrice()));

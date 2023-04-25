@@ -2,19 +2,19 @@ package com.example.rucafe;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
+/**
+ * Class for Cart Activity where user can add their order
+ * to Orders or remove specific items
+ * @author Kirill Vine
+ * @author Michael Burton
+ */
 public class CartActivity extends Activity {
     private ArrayList<MenuItem> orderItems;
     private Button removeSelected;
@@ -26,6 +26,14 @@ public class CartActivity extends Activity {
     private double tax;
     private double total;
 
+    /**
+     * initializes the activity and displays all the elements of UI.
+     * Allows user to remove selected item and update the total and list
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,49 +42,47 @@ public class CartActivity extends Activity {
         addOrder = (Button) findViewById(R.id.addOrder);
         showList();
         displayTotal();
-        removeSelected.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                for (int i = 0; i < orderItems.size(); i++) {
-                    if(orderItems.get(i).toString().equals(selectedItem)){
-                        MainActivity.currentOrder.removeItem(orderItems.get(i));
-                    }
+        removeSelected.setOnClickListener(v -> {
+            for (int i = 0; i < orderItems.size(); i++) {
+                if(orderItems.get(i).toString().equals(selectedItem)){
+                    MainActivity.currentOrder.removeItem(orderItems.get(i));
                 }
-                displayTotal();
-                showList();
             }
+            displayTotal();
+            showList();
         });
-        addOrder.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                //order is added to allOrders array list and a new curent order is created
-                MainActivity.allOrders.add(MainActivity.currentOrder);
-                MainActivity.currentOrder = new Order();
-                displayTotal();
-                showList();
-            }
+        addOrder.setOnClickListener(v -> {
+            MainActivity.allOrders.add(MainActivity.currentOrder);
+            MainActivity.currentOrder = new Order();
+            displayTotal();
+            showList();
         });
     }
+
+    /**
+     * Shows list of items and allows the user to select a specific item
+     */
     private void showList(){
         orderItems = MainActivity.currentOrder.getItems();
         String orderStringList [] = new String[orderItems.size()];
         for(int i = 0; i < orderItems.size(); i++) {
             orderStringList[i]=orderItems.get(i).toString();
         }
-        adapter = new ArrayAdapter<String>(this,
+        adapter = new ArrayAdapter<>(this,
                 R.layout.activity_listview, orderStringList);
 
         listView = (ListView) findViewById(R.id.ordersList);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new OnItemClickListener()
-        {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(CartActivity.this, orderStringList[position], Toast.LENGTH_SHORT).show();
-                selectedItem = (String) adapter.getItem(position);
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Toast.makeText(CartActivity.this, orderStringList[position], Toast.LENGTH_SHORT).show();
+            selectedItem = (String) adapter.getItem(position);
         });
 
     }
+
+    /**
+     * displays total for the order, including subtotal and sales tax
+     */
     private void displayTotal() {
         DecimalFormat df = new DecimalFormat("#,###.00");
         TextView orderSubtotal = (TextView)findViewById(R.id.orderSubtotal);
