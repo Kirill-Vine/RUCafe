@@ -1,6 +1,8 @@
 package com.example.rucafe;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -8,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import androidx.appcompat.app.AlertDialog;
 /**
  * Class for Orders Activity where user can select
  * an order and cancel it
@@ -36,13 +39,25 @@ public class OrdersActivity extends AppCompatActivity {
         removeSelected = (Button) findViewById(R.id.cancelOrder);
         showList();
         removeSelected.setOnClickListener(v -> {
-            for (int i = 0; i < orders.size(); i++) {
-                if(orders.get(i).toString().equals(selectedItem)){
-                    MainActivity.allOrders.remove(orders.get(i));
-                    MainActivity.allOrders.trimToSize();
+            AlertDialog.Builder builder = new AlertDialog.Builder(OrdersActivity.this);
+            builder.setMessage("Do you want to remove this item?");
+            builder.setTitle("Remove Item");
+            builder.setCancelable(false);
+            builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                for (int i = 0; i < orders.size(); i++) {
+                    if(orders.get(i).toString().equals(selectedItem)){
+                        MainActivity.allOrders.remove(orders.get(i));
+                        MainActivity.allOrders.trimToSize();
+                    }
                 }
-            }
-            showList();
+                showList();
+            });
+            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                dialog.cancel();
+
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
     }
 

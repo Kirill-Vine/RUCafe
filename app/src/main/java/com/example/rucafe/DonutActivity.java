@@ -46,6 +46,10 @@ public class DonutActivity extends AppCompatActivity {
     };
     ArrayList<Donut> donutsList = new ArrayList<>();
 
+    /**
+     * Initializes the donutList arrayList with every donut permutations
+     */
+
     void makeDonutList() {
         Donut tempDonut = new YeastDonut();
         for (int i = 0; i < DONUT_NUMBER; i++) {
@@ -68,7 +72,15 @@ public class DonutActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * initializes the activity and displays all the elements of UI.
+     * allows user to use the buttons to customize and order Donuts
+     * including the recylcer view
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

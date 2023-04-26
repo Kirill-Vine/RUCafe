@@ -1,12 +1,17 @@
 package com.example.rucafe;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 /**
@@ -43,13 +48,26 @@ public class CartActivity extends Activity {
         showList();
         displayTotal();
         removeSelected.setOnClickListener(v -> {
-            for (int i = 0; i < orderItems.size(); i++) {
-                if(orderItems.get(i).toString().equals(selectedItem)){
-                    MainActivity.currentOrder.removeItem(orderItems.get(i));
+            Log.d("wat","how is this not working?");
+            AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+            builder.setMessage("Do you want to remove this item?");
+            builder.setTitle("Remove Item");
+            builder.setCancelable(false);
+            builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                for (int i = 0; i < orderItems.size(); i++) {
+                    if(orderItems.get(i).toString().equals(selectedItem)){
+                        MainActivity.currentOrder.removeItem(orderItems.get(i));
+                    }
                 }
-            }
-            displayTotal();
-            showList();
+                displayTotal();
+                showList();
+            });
+            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                dialog.cancel();
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
         });
         addOrder.setOnClickListener(v -> {
             MainActivity.allOrders.add(MainActivity.currentOrder);
